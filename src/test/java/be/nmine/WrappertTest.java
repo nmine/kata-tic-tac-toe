@@ -7,7 +7,6 @@ import static be.nmine.Position.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WrappertTest {
-
     @Test
     void first_player_is_alway_x(){
         //Given
