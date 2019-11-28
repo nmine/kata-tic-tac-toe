@@ -1,14 +1,12 @@
 package be.nmine;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Game {
 
     Player currentPlayer;
-    Map<Position,Player> positions = new HashMap<>();
+    final Board board;
 
     public Game() {
+        this.board = new Board();
         this.currentPlayer = Player.O;
     }
 
@@ -16,11 +14,11 @@ public class Game {
         if(isPositionAlreadyTaken(position))
             throw new IllegalStateException();
         this.currentPlayer = this.currentPlayer.equals(Player.X) ? Player.O : Player.X;
-        positions.put(position,currentPlayer);
+        board.setPosition(position,currentPlayer);
     }
 
     private boolean isPositionAlreadyTaken(Position position) {
-        return positions.keySet().stream().filter(position1 -> position1 == position).findFirst().isPresent();
+        return board.isPositionAlreadyTaken(position);
     }
 
     public Player lastPlay() {
@@ -28,17 +26,12 @@ public class Game {
     }
 
     public boolean isWon() {
-        return true;
+        return board.isTopRowFill(currentPlayer) || board.isColumnMiddleFill(currentPlayer);
     }
 
     public Player getPlayerForPosition(Position position) {
-        return positions.entrySet().stream()
-                .filter(positionStringEntry -> positionStringEntry.getKey() == position)
-                .findFirst()
-                .get().getValue();
+        return board.getPlayerForPosition(position);
+
     }
 
-    public boolean isTopRowFillByXPlayer() {
-        return false;
-    }
 }

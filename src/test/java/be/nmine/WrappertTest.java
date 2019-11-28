@@ -50,13 +50,13 @@ public class WrappertTest {
     }
 
     @Test
-    void player_X_fill_top_row_should(){
+    void player_X_fill_top_row_should_win_the_game(){
         //Given
         Game game = new Game();
         //When
         playerXFillTopRow(game);
         //Then
-        assertThat(game.getPlayerForPosition(TOP_LEFT)).isEqualTo(Player.X);
+        assertThat(game.isWon()).isEqualTo(true);
     }
 
     private void playerXplay(Game game) {
@@ -64,11 +64,11 @@ public class WrappertTest {
     }
 
     @Test
-    void player_X_play_to_left_should(){
+    void player_O_fill_column_center_should_win_the_game(){
         //Given
         Game game = new Game();
         //When
-        playerXFillTopRow(game);
+        playerOFillCenterColumn(game);
         //Then
         assertThat(game.isWon()).isEqualTo(true);
     }
@@ -79,6 +79,15 @@ public class WrappertTest {
         game.play(TOP_RIGHT);
         game.play(MIDDLE_RIGHT);
         game.play(TOP_MIDLLE);
+    }
+
+    private void playerOFillCenterColumn(Game game) {
+        game.play(TOP_LEFT);
+        game.play(MIDDLE_LEFT);
+        game.play(TOP_RIGHT);
+        game.play(MIDDLE_RIGHT);
+        game.play(TOP_MIDLLE);
+        game.play(MIDDLE_CENTER);
     }
 
 }
