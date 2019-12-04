@@ -1,6 +1,7 @@
 package be.nmine;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class Board {
@@ -8,7 +9,7 @@ public class Board {
     final Map<Position,Player> positions;
 
     public Board() {
-        this.positions = new HashMap<>();
+        this.positions = new EnumMap<>(Position.class);
     }
 
     protected boolean isPositionAlreadyTaken(Position position) {
@@ -27,9 +28,9 @@ public class Board {
     }
 
     public boolean isTopRowFill(Player player) {
-        return getPlayerForPosition(Position.TOP_LEFT) == player &&
-                getPlayerForPosition(Position.TOP_MIDLLE) == player &&
-                getPlayerForPosition(Position.TOP_RIGHT) == player;
+        return Arrays.stream(WinningPosition.ROW_TOP.getPositions()).allMatch(
+               position ->  getPlayerForPosition(position) == player
+        );
     }
 
     public boolean isColumnMiddleFill(Player player) {

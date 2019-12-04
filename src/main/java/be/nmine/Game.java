@@ -31,7 +31,6 @@ public class Game {
 
     public Player getPlayerForPosition(Position position) {
         return board.getPlayerForPosition(position);
-
     }
 
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static be.nmine.Position.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WrappertTest {
+public class GameTest {
     @Test
     void first_player_is_alway_x(){
         //Given
